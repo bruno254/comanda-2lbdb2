@@ -19,4 +19,15 @@ export class ServicoFirebaseService {
         })
       );
   }
+
+  update(produto: any, key: string) {
+    this.db.list('produtos').update(key, produto)
+      .catch((error: any) => {
+        console.error(error);
+      });
+  }
+
+
+
+
 }

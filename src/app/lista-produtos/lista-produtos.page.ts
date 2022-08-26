@@ -16,27 +16,40 @@ export class ListaProdutosPage implements OnInit {
     this.buscarSalgados();
   }
 
-
-  doRefresh(event) {
-      event.target.complete();
-  }
-
   public buscarSalgados(event?){
-    this.Produtos = [];
     this._service.getAll().subscribe(resp => {
+      this.Produtos = [];
       resp.forEach(item => {
-        this.Produtos.push(item);
+        let i : any = item.value;
+        if(i.disponivel)
+          this.Produtos.push(item);
       });
-      
+
+      resp.forEach(item => {
+        let i : any = item.value;
+        if(!i.disponivel)
+          this.Produtos.push(item);
+      });
+
       if(event){
         event.target.complete();
       }
-      console.log(this.Produtos);
     })
   }
 
   public editSalgado(item : any){
-    console.log(item);
+    let key = item.key;
+    let value : any = item.value;
+
+    if(value.disponivel){
+      value.disponivel = false;
+    } else {
+      value.disponivel = true;
+    }
+
+    this._service.update(value,key);
+
+    this.buscarSalgados();
   }
 
 }
