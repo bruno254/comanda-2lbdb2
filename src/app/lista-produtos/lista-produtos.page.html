@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Comanda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="buscarSalgados($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of Produtos">
+      <ion-item (dblclick)="editSalgado(pedido)" [color]="item.value.disponivel ? 'secondary' : 'danger'">
+        <h1>{{item.value.nome}}</h1>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <button ion-button round color="secondary" (click)="editSalgado(item)">
+          <ion-icon name="apps-outline"></ion-icon>
+        </button>
+    </ion-item-options>
+
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
