@@ -16,7 +16,8 @@
 
       <ion-item-options side="end">
         <button ion-button round color="secondary" (click)="editSalgado(item)">
-          <h1>| Alterar |</h1>
+          <ion-icon *ngIf="item.value.disponivel == false" name="checkbox-outline" size="large" slot="end" color="primary"></ion-icon>
+          <ion-icon *ngIf="item.value.disponivel == true" name="close-circle-outline" size="large" slot="end" color="danger"></ion-icon>
         </button>
     </ion-item-options>
 
